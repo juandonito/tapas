@@ -21,12 +21,12 @@ const useStyle = createUseStyles({
     }
 })
 
-const UserItem = () => {
+const UserItem = ({ user }) => {
     const classes = useStyle()
     return (
         <div className={classes.UserItem}>
-            <span className={classes.UserName}>Leanne Graham</span>
-            <span className={classes.UserMail}>Sincere@april.biz</span>
+            <span className={classes.UserName}>{user.name}</span>
+            <span className={classes.UserMail}>{user.email}</span>
         </div>
     )
 }
