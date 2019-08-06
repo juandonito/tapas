@@ -3,6 +3,7 @@ import { createUseStyles } from 'react-jss'
 
 const useStyles = createUseStyles({
   Header: {
+    boxSizing: 'border-box',
     backgroundImage: 'linear-gradient(0deg, #1410B8 0%, #4ED8E4 100%)',
     height: 91,
     color: 'white',

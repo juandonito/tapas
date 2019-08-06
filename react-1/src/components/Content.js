@@ -1,6 +1,8 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss'
 
+import UserList from './UserList'
+
 const useStyles = createUseStyles({
   Content: {
     width: '90%',
@@ -14,7 +16,7 @@ function Content(props) {
   const classes = useStyles(props);
   return (
     <section className={classes.Content}>
-      Here goes your lists
+      <UserList />
     </section>
   );
 }
