@@ -19,24 +19,29 @@ const UserList = () => {
     const classes = useStyle()
 
     const [userList, setUserList] = useState([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+
+        setLoading(true)
 
         users.get('/')
             .then(res => {
                 setUserList(res.data)
+                setLoading(false)
             })
             .catch(err => {
+                setLoading(false)
                 console.log(err)
             })
 
-    })
+    }, [])
 
     const list = userList.map(user => <UserItem key={user.username} user={user} />)
 
     return (
         <div className={classes.UserList}>
-            {list}
+            { loading ? <span>Loading Users</span> : list}
         </div>
     )
 }
