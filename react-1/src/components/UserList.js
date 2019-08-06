@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { createUseStyles } from 'react-jss'
+import { DndProvider } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 import UserItem from './UserItem'
 
@@ -37,11 +39,35 @@ const UserList = () => {
 
     }, [])
 
-    const list = userList.map(user => <UserItem key={user.username} user={user} />)
+    const moveUser = useCallback(
+        (dragIndex, hoverIndex) => {
+            const dragUser = userList[dragIndex]
+
+            //immutable userList
+            let newUsers = [...userList];
+            newUsers.splice(dragIndex, 1);
+            newUsers.splice(hoverIndex, 0, dragUser)
+
+            setUserList(
+                newUsers
+            )
+        },
+        [userList]
+    )
+
+    const list = userList.map((user, index) => <UserItem 
+                                            key={user.id}
+                                            user={user}
+                                            index={index}
+                                            moveUser={moveUser}
+                                            id={user.id}
+                                        />)
 
     return (
         <div className={classes.UserList}>
-            { loading ? <span>Loading Users</span> : list}
+            <DndProvider backend={HTML5Backend}>
+                { loading ? <span>Loading Users</span> : list}
+            </DndProvider>
         </div>
     )
 }
