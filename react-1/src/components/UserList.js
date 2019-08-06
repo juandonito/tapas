@@ -4,6 +4,7 @@ import { DndProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
 import UserItem from './UserItem'
+import Loader from './Loader'
 
 import users from '../api/users'
 
@@ -66,7 +67,7 @@ const UserList = () => {
     return (
         <div className={classes.UserList}>
             <DndProvider backend={HTML5Backend}>
-                { loading ? <span>Loading Users</span> : list}
+                { loading ? <Loader/> : list}
             </DndProvider>
         </div>
     )
